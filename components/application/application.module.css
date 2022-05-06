@@ -1,0 +1,62 @@
+.application {
+    overflow: hidden;
+    background: rgba( 9, 11, 10, 0.55 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 7px );
+    -webkit-backdrop-filter: blur( 7px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+    position: absolute;
+    border-radius: 8px;
+    
+    min-width: 250px;
+    min-height: 250px;
+
+    resize: both;
+}
+.toolbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.toolbar:hover {
+    cursor: move;
+}
+
+.name {
+    margin: 0 5px 0 0;
+    font-size: 20px;
+    color: white;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.button {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    text-align: center;
+
+    border: none;
+    outline: none;
+}
+.button:hover {
+    cursor: pointer;
+}
+.close {
+    background-color: #fd605d;
+}
+.hide {
+    background-color: #ffbd2b;
+}
+.zoom {
+    background-color: #32c749;
+}
