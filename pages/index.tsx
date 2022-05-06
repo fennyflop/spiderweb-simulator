@@ -25,7 +25,9 @@ const Homescreen: NextPage = () => {
     if (type === 'icon') {
       setIcons({...icons, [name]: {...icons[name], left, top}})
     } else {
-      setApplications({...applications, [name]: {...applications[name], ...data, left, top}})
+      setApplications((prev) => {
+        return {...prev, [name]: {...prev[name], ...data, left, top}}
+      })
     }
   },
   [icons, setIcons]);
