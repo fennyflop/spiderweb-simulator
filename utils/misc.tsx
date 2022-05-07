@@ -14,6 +14,7 @@ type TApplication = {
 }
 
 type TIcon = {
+    type: 'icon' | 'folder'; // different logic for folders
     name: string;
     image: string;
     filename: string;

@@ -38,10 +38,11 @@ export const CustomDragLayer = () => {
   function renderItem() {
     switch (itemType) {
       case 'app':
-        // item.data is for styles
         return <Application {...item} {...item.data} top={0} left={0} />
       case 'icon':
-          return <Icon {...item} top={0} left={0} />
+        return <Icon {...item} top={0} left={0} />
+      case 'folder':
+        return <Icon {...item} top={0} left={0} />
       default:
         return null
     }

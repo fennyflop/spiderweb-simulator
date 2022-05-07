@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { DndProvider, useDrop } from 'react-dnd'
 import Application from '../components/application/application';
 import { CustomDragLayer } from '../components/custom-drag-layer/custom-drag-layer';
@@ -13,13 +13,15 @@ const Homescreen: NextPage = () => {
   const [index, setIndex] = useState<number>(0);
 
   const [icons, setIcons] = useState<IIcons>({
-    "team": { top: 180, left: 20, name: "team", filename: "team.txt", image: "/text-icon.png"},
-    "roadmap": { top: 20, left: 80, name: "roadmap", filename: "roadmap.txt", image: "/text-icon.png" },
+    "team": { top: 180, left: 20, name: "team", filename: "team.txt", image: "/text-icon.png", type: "icon"},
+    "roadmap": { top: 20, left: 80, name: "roadmap", filename: "roadmap.txt", image: "/text-icon.png", type: "icon"},
+    "folder": {top: 200, left: 200, name: "folder", filename: "folder n1", image: "/folder-icon.png", type: 'folder'},
   });
 
   const [applications, setApplications] = useState<IApplications>({
-    team: {name: "team", applicationName: "team.txt", index: 1, width: 250, height: 250, top: 50, left: 50, isOpen: true, isZoomed: false, children: null},
+    team: {name: "team", applicationName: "team.txt", index: 1, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: null},
     roadmap: {name: "roadmap", applicationName: "roadmap.txt", index: 0, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: null},
+    folder: {name: "folder", applicationName: "folder n1", index: 2, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: null}
   })
 
   // specify apps here
@@ -37,7 +39,7 @@ const Homescreen: NextPage = () => {
 
   const [, dropRef] = useDrop(
     () => ({
-      accept: ['icon', 'app'],
+      accept: ['icon', 'app', 'folder'],
       drop(item: any, monitor) {
         const delta = monitor.getDifferenceFromInitialOffset()
         const top = Math.round(item?.top + delta?.y)
@@ -49,19 +51,17 @@ const Homescreen: NextPage = () => {
     [move],
   );
 
-  const openApplication = (name: string) => {
-    // setApplications({...applications, [name]: {...applications[name], isOpen: true}});
+  const openApplication = useCallback((name: string) => {
     setApplications((prev: any) => {
       return {...prev, [name]: {...prev[name], isOpen: true}}
     })
-  }
+  }, [setApplications]);
 
-  const closeApplication = (name: string) => {
-    // setApplications({...applications, [name]: {...applications[name], isOpen: false}})
+  const closeApplication = useCallback((name: string) => {
     setApplications((prev: any) => {
       return {...prev, [name]: {...prev[name], isOpen: false}}
     })
-  }
+  }, [setApplications]);
 
   const zoomApplication = (name: string) => {
     setApplications((prev: any) => {
