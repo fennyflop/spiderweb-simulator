@@ -20,7 +20,7 @@ const Folder: FC<IFolder> = ({items}) => {
                 {
                     Object.keys(items).map((key, i) => {
                         const {name} = items[key];
-                        return <li className={styles.element} key={i} onClick={() => select(items[key])}>{name}</li>
+                        return <li className={`${styles.element} ${selectedItem.name === name && styles.selected}`} key={i} onClick={() => select(items[key])}>{name}</li>
                     })
                 }
             </ul>

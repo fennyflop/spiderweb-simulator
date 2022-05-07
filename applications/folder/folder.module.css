@@ -5,20 +5,30 @@
     /* max-width: 85px; */
     display: flex;
     flex-direction: column;
+    gap: 5px;
     justify-content: flex-start;
     margin: 0;
-    padding: 0 0 5px 0;
+    box-sizing: border-box;
+    padding: 0 5px 5px 0;
     border-right: 1px solid rgba( 255, 255, 255, 0.18 );
     /* border-bottom: 1px solid rgba( 255, 255, 255, 0.18 ); */
 }
 .element {
-    width: fit-content;
+    box-sizing: border-box;
+    padding: 2px;
+    width: 100%;
     align-items: center;
     display: flex;
     justify-content: space-between;
+    border-radius: 2px;
+    margin-bottom: 2px;
 }
 .element:hover {
+    background-color: #fd605d;
     cursor: pointer;
+}
+.selected {
+    background-color: #c23633;
 }
 .circle {
     margin-right: 5px;
