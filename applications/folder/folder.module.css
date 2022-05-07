@@ -1,0 +1,51 @@
+.list {
+    width: 5%;
+    min-width: 85px;
+    height: 100%;
+    /* max-width: 85px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0 0 5px 0;
+    border-right: 1px solid rgba( 255, 255, 255, 0.18 );
+    /* border-bottom: 1px solid rgba( 255, 255, 255, 0.18 ); */
+}
+.element {
+    width: fit-content;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+.element:hover {
+    cursor: pointer;
+}
+.circle {
+    margin-right: 5px;
+    width: 8px;
+    height: 8px;
+    background-color: rgb(0, 213, 255);
+    border-radius: 50%;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    /* max-width: 85%; */
+}
+.image {
+    height: auto;
+    max-width: 90%;
+    max-height: 90%;
+    /* background-repeat: no-repeat; */
+    z-index: 100;
+    background-size: contain;
+    margin-right: auto;
+    margin-left: auto;
+    background-position: left;
+
+    position: relative;
+    left: 4px;
+}

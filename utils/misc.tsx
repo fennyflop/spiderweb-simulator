@@ -11,16 +11,27 @@ type TApplication = {
     isOpen: boolean;
     isZoomed: boolean;
     children: React.ReactNode;
+
+    style?: CSSStyleSheet
 }
 
 type TIcon = {
-    type: 'icon' | 'folder'; // different logic for folders
+    type: 'icon';
     name: string;
     image: string;
     filename: string;
     
     top: number;
     left: number;
+}
+
+export type TFolderItem = {
+    name: string;
+    image: string;
+}
+
+export interface IFolderItems {
+    [key: string]: TFolderItem;
 }
 
 export interface IIcons {

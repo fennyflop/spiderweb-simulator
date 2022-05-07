@@ -41,8 +41,6 @@ export const CustomDragLayer = () => {
         return <Application {...item} {...item.data} top={0} left={0} />
       case 'icon':
         return <Icon {...item} top={0} left={0} />
-      case 'folder':
-        return <Icon {...item} top={0} left={0} />
       default:
         return null
     }

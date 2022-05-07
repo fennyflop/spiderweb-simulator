@@ -33,7 +33,6 @@ interface ITextFileImage {
 }
 
 const TextFileImage: FC<ITextFileImage> = ({src, alt, width, height, className}) => {
-    console.log(src);
     return src[0] === '/' ?
     <Image src={src} alt={alt} width={width} height={height} className={className} />
     :

@@ -17,9 +17,11 @@ interface IApplication {
 
     zoom: (name: string) => void;
     close: (name: string) => void;
+
+    style?: CSSStyleSheet;
 }
 
-const Application: FC<IApplication> = ({name, index, top, left, isOpen, zoom, close, children, width, height, applicationName, isZoomed}) => {
+const Application: FC<IApplication> = ({name, index, top, left, isOpen, zoom, close, children, width, height, applicationName, isZoomed, style}) => {
     const applicationRef = useRef<any>(null);
 
     const [{ isDragging }, dragRef, preview] = useDrag(
@@ -62,7 +64,8 @@ const Application: FC<IApplication> = ({name, index, top, left, isOpen, zoom, cl
                 </div>
                 <p className={styles.name}>{applicationName}</p>
             </div>
-            <section className={styles.body}>
+            {/* @ts-ignore */}
+            <section className={styles.body} style={style}>
                 {children}
             </section>
         </section>
