@@ -26,7 +26,7 @@ const Application: FC<IApplication> = ({name, index, top, left, isOpen, zoom, cl
         () => ({
           type: 'app',
           item: () =>  {
-              return { name, left, top, data: {width: applicationRef.current.offsetWidth, height: applicationRef.current.offsetHeight, isOpen}, applicationName, type: "app" }; 
+              return { name, left, top, children, data: {width: applicationRef.current.offsetWidth, height: applicationRef.current.offsetHeight, isOpen}, applicationName, type: "app" }; 
           },
           collect: (monitor: { isDragging: () => any; }) => ({
             isDragging: monitor.isDragging(),
@@ -62,7 +62,9 @@ const Application: FC<IApplication> = ({name, index, top, left, isOpen, zoom, cl
                 </div>
                 <p className={styles.name}>{applicationName}</p>
             </div>
-            {children}
+            <section className={styles.body}>
+                {children}
+            </section>
         </section>
     );
 }

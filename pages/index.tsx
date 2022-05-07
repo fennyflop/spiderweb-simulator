@@ -1,6 +1,8 @@
 import type { NextPage } from 'next'
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { DndProvider, useDrop } from 'react-dnd'
+import Roadmap from '../applications/roadmap/roadmap';
+import Team from '../applications/team/team';
 import Application from '../components/application/application';
 import { CustomDragLayer } from '../components/custom-drag-layer/custom-drag-layer';
 import Icon from '../components/icon/icon';
@@ -19,8 +21,8 @@ const Homescreen: NextPage = () => {
   });
 
   const [applications, setApplications] = useState<IApplications>({
-    team: {name: "team", applicationName: "team.txt", index: 1, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: null},
-    roadmap: {name: "roadmap", applicationName: "roadmap.txt", index: 0, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: null},
+    team: {name: "team", applicationName: "team.txt", index: 1, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: <Team />},
+    roadmap: {name: "roadmap", applicationName: "roadmap.txt", index: 0, width: 250, height: 250, top: 50, left: 50, isOpen: true, isZoomed: false, children: <Roadmap />},
     folder: {name: "folder", applicationName: "folder n1", index: 2, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: null}
   })
 

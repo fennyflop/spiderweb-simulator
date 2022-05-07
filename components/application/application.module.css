@@ -60,3 +60,35 @@
 .zoom {
     background-color: #32c749;
 }
+
+.body {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 5px 35px; /* it has to do with scroll bug with border-radius */
+    height: 100%;
+
+    color: white;
+
+    overflow-y: scroll;
+}
+
+.body::-webkit-scrollbar {
+    background-color: transparent;
+    width: 8px;
+}
+
+/* background of the scrollbar except button or resizer */
+.body::-webkit-scrollbar-track {
+    /* background-color: #fff; */
+}
+
+/* scrollbar itself */
+.body::-webkit-scrollbar-thumb {
+    background-color: #babac0;
+    border-radius: 16px;
+}
+
+/* set button(top and bottom of the scrollbar) */
+.body::-webkit-scrollbar-button {
+    display:none;
+}

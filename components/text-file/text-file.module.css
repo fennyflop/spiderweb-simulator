@@ -1,0 +1,25 @@
+.title {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 300;
+    text-decoration: underline;
+
+    display: flex;
+    align-items: center;
+}
+.text {
+    margin: 10px 0 0;
+    font-size: 20px;
+}
+.article {
+    margin: 10px 0 10px;
+    border-top: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.heading {
+    margin: 10px 0 0;
+    font-size: 25px;
+    font-weight: 300;
+
+    display: flex;
+    align-items: center;
+}
