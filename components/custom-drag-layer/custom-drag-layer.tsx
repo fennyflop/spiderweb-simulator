@@ -35,21 +35,17 @@ export const CustomDragLayer = () => {
         }
     ));
 
-  function renderItem() {
-    switch (itemType) {
-      case 'app':
-        return <Application {...item} {...item.data} top={0} left={0} />
-      case 'icon':
-        return <Icon {...item} top={0} left={0} />
-      default:
-        return null
-    }
-  }
   if (!isDragging) {
     return null
   }
+
+  // console.log(item);
   return (
     // @ts-ignore
-    <div style={layerStyles}><div style={getItemStyles(initialOffset, currentOffset)}>{renderItem()}</div></div>
+    <div style={layerStyles}>
+      <div style={getItemStyles(initialOffset, currentOffset)}>
+        {itemType === 'app' ? <Application {...item} {...item.data} top={0} left={0}>{item.children}</Application> : <Icon {...item} top={0} left={0} />}
+      </div>
+    </div>
   )
 }

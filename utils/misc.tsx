@@ -13,6 +13,7 @@ type TApplication = {
     children: React.ReactNode;
 
     style?: CSSStyleSheet
+    data?: any;
 }
 
 type TIcon = {
