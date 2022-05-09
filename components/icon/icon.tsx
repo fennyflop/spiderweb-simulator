@@ -5,7 +5,7 @@ import { getEmptyImage } from 'react-dnd-html5-backend';
 import styles from './icon.module.css';
 
 interface IIcon {
-    type: 'icon' | 'folder';
+    type: 'icon';
     name: string;
 
     top: number;
@@ -17,9 +17,10 @@ interface IIcon {
 }
 
 const Icon: FC<IIcon> = ({name, type, image, filename, top, left, open}) => {
+  if (!name || !type || !image || !filename) return null; 
     const [{ isDragging }, drag, preview] = useDrag(
       () => ({
-        type,
+        type: 'icon',
         item: { name, left, top, filename, image, type: "icon" },
         collect: (monitor: { isDragging: () => any; }) => ({
           isDragging: monitor.isDragging(),
