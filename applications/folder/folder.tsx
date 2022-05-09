@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { IFolderItems, TFolderItem } from '../../utils/misc';
 import styles from './folder.module.css';
 
@@ -6,13 +6,19 @@ interface IFolder {
     // items: IFolderItems;
     // fetchSelectedItem: () => TFolderItem;
     // setSelectedItem: (item: TFolderItem) => void;
-
+    update: any;
+    item: TFolderItem;
     items: IFolderItems;
+
 }
 
-const Folder: FC<IFolder> = ({items}) => {
+const Folder: FC<IFolder> = ({item, items, update}) => {
 
-    const [item, setItem] = useState<TFolderItem>({name: '', image: ''});
+    // const [item, setItem] = useState<TFolderItem>({name: '', image: ''});
+
+    const setItem = (updatedItem: TFolderItem) => {
+        update('folder', 'children', <Folder items={items} update={update} item={updatedItem} />);
+    }
 
     return (
         <>

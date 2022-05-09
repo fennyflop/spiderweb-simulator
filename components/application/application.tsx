@@ -22,15 +22,15 @@ interface IApplication {
     style?: CSSStyleSheet;
 }
 
-const Application: FC<IApplication> = ({name, index, top, left, isOpen, zoom, close, children, width, height, applicationName, isZoomed, style, drilledData}) => {
+const Application: FC<IApplication> = ({name, index, top, left, isOpen, zoom, close, children, width, height, applicationName, isZoomed, style}) => {
     const applicationRef = useRef<any>(null);
+
 
     const [{ isDragging }, dragRef, preview] = useDrag(
         () => ({
           type: 'app',
           item: () =>  {
-              console.log(drilledData);
-              return { name, left, top, children, data: {width: applicationRef.current.offsetWidth, height: applicationRef.current.offsetHeight, isOpen}, applicationName, type: "app", drilledData}; 
+              return { name, left, style, top, data: {width: applicationRef.current.offsetWidth, height: applicationRef.current.offsetHeight, isOpen}, applicationName, type: "app"}; 
           },
           collect: (monitor: { isDragging: () => any; }) => ({
             isDragging: monitor.isDragging(),

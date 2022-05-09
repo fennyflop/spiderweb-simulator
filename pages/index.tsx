@@ -17,11 +17,11 @@ const Homescreen: NextPage = () => {
   
   const [index, setIndex] = useState<number>(0);
 
-  // const updateApplicationData = (application: string, drilledData: any) => {
-  //   setApplications((prev: any) => {
-  //     return {...prev, [application]: {...prev[application], drilledData}};
-  //   })
-  // }
+  const updateApplication = (application: string, field: string, updatedChildren: any) => {
+    setApplications((prev: any) => {
+      return {...prev, [application]: {...prev[application], [field]: updatedChildren }};
+    })
+  }
 
   const [icons, setIcons] = useState<IIcons>({
     "team": { top: 180, left: 20, name: "team", filename: "team.txt", image: "/text-icon.png", type: "icon"},
@@ -31,8 +31,8 @@ const Homescreen: NextPage = () => {
   
   const [applications, setApplications] = useState<IApplications>({
     team: {name: "team", applicationName: "team.txt", index: 1, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: <Team />},
-    roadmap: {name: "roadmap", applicationName: "roadmap.txt", index: 0, width: 250, height: 250, top: 50, left: 50, isOpen: true, isZoomed: false, children: <Roadmap />},
-    folder: {name: "folder", applicationName: "folder n1", style: {'display': 'flex'}, index: 2, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, drilledData: {item: {name: '', image: ''}}, children: <Folder items={folderTest} />}
+    roadmap: {name: "roadmap", applicationName: "roadmap.txt", index: 0, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: <Roadmap />},
+    folder: {name: "folder", applicationName: "folder n1", style: {'display': 'flex'}, index: 2, width: 250, height: 250, top: 50, left: 50, isOpen: true, isZoomed: false, drilledData: {item: {name: '', image: ''}}, children: <Folder item={{name: '', image: ''}} items={folderTest} update={updateApplication} />}
   })
   
   // useEffect(() => {
@@ -87,7 +87,7 @@ const Homescreen: NextPage = () => {
 
   return (
     <main className={styles.main} ref={dropRef}>
-      <CustomDragLayer />
+      <CustomDragLayer applications={applications} />
       {
         Object.keys(icons).map((icon: any) => {
           return <Icon {...icons[icon]} key={icon} open={openApplication} />

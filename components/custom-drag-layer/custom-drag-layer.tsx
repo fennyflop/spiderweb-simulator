@@ -1,3 +1,4 @@
+import { FC, useEffect } from 'react';
 import { useDragLayer, XYCoord } from 'react-dnd';
 import Application from '../application/application';
 import Icon from '../icon/icon';
@@ -24,7 +25,12 @@ function getItemStyles(initialOffset: XYCoord | null, currentOffset: XYCoord | n
     WebkitTransform: transform,
   }
 }
-export const CustomDragLayer = () => {
+
+interface ICustomDragLayer {
+  applications: any;
+}
+
+export const CustomDragLayer: FC<ICustomDragLayer> = ({applications}) => {
     const { itemType, isDragging, item, initialOffset, currentOffset } =
         useDragLayer((monitor) => ({
           item: monitor.getItem(),
@@ -34,17 +40,16 @@ export const CustomDragLayer = () => {
           isDragging: monitor.isDragging(),
         }
     ));
-
+    
   if (!isDragging) {
     return null
   }
 
-  // console.log(item);
   return (
     // @ts-ignore
     <div style={layerStyles}>
       <div style={getItemStyles(initialOffset, currentOffset)}>
-        {itemType === 'app' ? <Application {...item} {...item.data} top={0} left={0}>{item.children}</Application> : <Icon {...item} top={0} left={0} />}
+        {itemType === 'app' ? <Application {...item} {...item.data} top={0} left={0}>{applications[item.name].children}</Application> : <Icon {...item} top={0} left={0} />}
       </div>
     </div>
   )
