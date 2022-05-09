@@ -7,7 +7,7 @@ import Team from '../applications/team/team';
 import Application from '../components/application/application';
 import { CustomDragLayer } from '../components/custom-drag-layer/custom-drag-layer';
 import Icon from '../components/icon/icon';
-import {IApplications, IFolderItems, IIcons, TFolderItem} from '../utils/misc';
+import {IApplications, IFolderItems, IIcons, stringify, TFolderItem} from '../utils/misc';
 
 import styles from './index.module.css';
 
@@ -15,33 +15,32 @@ const folderTest: IFolderItems = {dog: {name: 'dog.png', image: 'https://post.me
 
 const Homescreen: NextPage = () => {
   
+  // z-index for applications
   const [index, setIndex] = useState<number>(0);
-
-  const updateApplication = (application: string, field: string, updatedChildren: any) => {
-    setApplications((prev: any) => {
-      return {...prev, [application]: {...prev[application], [field]: updatedChildren }};
-    })
-  }
 
   const [icons, setIcons] = useState<IIcons>({
     "team": { top: 180, left: 20, name: "team", filename: "team.txt", image: "/text-icon.png", type: "icon"},
     "roadmap": { top: 20, left: 80, name: "roadmap", filename: "roadmap.txt", image: "/text-icon.png", type: "icon"},
     "folder": {top: 200, left: 200, name: "folder", filename: "folder n1", image: "/folder-icon.png", type: "icon"},
   });
+
+  const updateApplication = (application: string, field: string, updatedChildren: any) => {
+    setApplications((prev: any) => {
+      return {...prev, [application]: {...prev[application], [field]: updatedChildren }};
+    })
+  };
   
   const [applications, setApplications] = useState<IApplications>({
     team: {name: "team", applicationName: "team.txt", index: 1, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: <Team />},
     roadmap: {name: "roadmap", applicationName: "roadmap.txt", index: 0, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: <Roadmap />},
-    folder: {name: "folder", applicationName: "folder n1", style: {'display': 'flex'}, index: 2, width: 250, height: 250, top: 50, left: 50, isOpen: true, isZoomed: false, drilledData: {item: {name: '', image: ''}}, children: <Folder item={{name: '', image: ''}} items={folderTest} update={updateApplication} />}
+    folder: {name: "folder", applicationName: "folder n1", style: {'display': 'flex'}, index: 2, width: 250, height: 250, top: 50, left: 50, isOpen: true, isZoomed: false, children: <Folder item={{name: '', image: ''}} items={folderTest} update={updateApplication} />}
   })
   
-  // useEffect(() => {
-  //   console.log(applications.folder);
-  // }, [applications])
-  // specify apps here
   const move = useCallback((type: "app" | "icon", name: "team" | "roadmap", left: number, top: number, data?: any) => {
     if (type === 'icon') {
-      setIcons({...icons, [name]: {...icons[name], left, top}})
+      const updated = {...icons, [name]: {...icons[name], left, top}};
+      setIcons(updated);
+      localStorage.setItem('icons', JSON.stringify(updated));
     } else {
       setApplications((prev: any) => {
         setIndex(index + 1)
@@ -58,7 +57,6 @@ const Homescreen: NextPage = () => {
         const delta = monitor.getDifferenceFromInitialOffset()
         const top = Math.round(item?.top + delta?.y)
         const left = Math.round(item?.left + delta?.x)
-        console.log(item);
         move(item.type, item.name, left, top, item.data);
         return undefined
       },
@@ -84,6 +82,13 @@ const Homescreen: NextPage = () => {
       return {...prev, [name]: {...prev[name], isZoomed: !prev[name].isZoomed}};
     })
   }
+
+  // remember where each icon was left
+  useEffect(() => {
+    const loadedIcons = localStorage.getItem('icons');
+
+    if (loadedIcons) setIcons(JSON.parse(loadedIcons));
+    }, []);
 
   return (
     <main className={styles.main} ref={dropRef}>

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "flatted": "^3.2.5",
     "next": "12.1.6",
     "react": "18.1.0",
     "react-dnd": "^16.0.1",

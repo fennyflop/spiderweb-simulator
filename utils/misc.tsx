@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 type TApplication = {
     name: string;
     applicationName: string;
@@ -12,7 +14,7 @@ type TApplication = {
     isZoomed: boolean;
     children: React.ReactNode;
 
-    style?: CSSStyleSheet
+    style?: CSSProperties;
     data?: any;
 }
 
@@ -42,6 +44,23 @@ export interface IIcons {
 export interface IApplications {
     [key: string]: TApplication
 }
+
+export function stringify (object: any){
+    const simpleObject: any = {};
+    for (const prop in object ){
+        if (!object.hasOwnProperty(prop)){
+            continue;
+        }
+        if (typeof(object[prop]) == 'object'){
+            continue;
+        }
+        if (typeof(object[prop]) == 'function'){
+            continue;
+        }
+        simpleObject[prop] = object[prop];
+    }
+    return JSON.stringify(simpleObject); // returns cleaned up JSON
+};
 
 // { top: 180, left: 20, name: "team", filename: "team.txt", image: "/text-icon.png"}
 // roadmap: {name: "roadmap", applicationName: "roadmap.txt", width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: null},

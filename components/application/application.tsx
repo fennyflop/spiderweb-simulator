@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo, useRef } from 'react';
+import { CSSProperties, FC, useEffect, useMemo, useRef } from 'react';
 import { useDrag } from 'react-dnd';
 import styles from './application.module.css';
 import { getEmptyImage } from 'react-dnd-html5-backend';
@@ -18,8 +18,7 @@ interface IApplication {
     zoom: (name: string) => void;
     close: (name: string) => void;
 
-    drilledData?: any;
-    style?: CSSStyleSheet;
+    style?: CSSProperties;
 }
 
 const Application: FC<IApplication> = ({name, index, top, left, isOpen, zoom, close, children, width, height, applicationName, isZoomed, style}) => {

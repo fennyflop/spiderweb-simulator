@@ -3,9 +3,6 @@ import { IFolderItems, TFolderItem } from '../../utils/misc';
 import styles from './folder.module.css';
 
 interface IFolder {
-    // items: IFolderItems;
-    // fetchSelectedItem: () => TFolderItem;
-    // setSelectedItem: (item: TFolderItem) => void;
     update: any;
     item: TFolderItem;
     items: IFolderItems;
@@ -13,8 +10,6 @@ interface IFolder {
 }
 
 const Folder: FC<IFolder> = ({item, items, update}) => {
-
-    // const [item, setItem] = useState<TFolderItem>({name: '', image: ''});
 
     const setItem = (updatedItem: TFolderItem) => {
         update('folder', 'children', <Folder items={items} update={update} item={updatedItem} />);
