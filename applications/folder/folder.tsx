@@ -1,19 +1,20 @@
 import { FC, useCallback, useEffect, useState } from 'react';
-import { IFolderItems, TFolderItem } from '../../utils/misc';
+import { IFolderItems } from '../../utils/misc';
 import styles from './folder.module.css';
 
 interface IFolder {
     update: any;
-    item: TFolderItem;
-    items: IFolderItems;
-
+    field: string;
+    items: any;
 }
 
-const Folder: FC<IFolder> = ({item, items, update}) => {
+const Folder: FC<IFolder> = ({field, items, update}) => {
 
-    const setItem = (updatedItem: TFolderItem) => {
-        update('folder', 'children', <Folder items={items} update={update} item={updatedItem} />);
+    const setItem = (updatedItem: string) => {
+        update('folder', 'children', <Folder items={items} update={update} field={updatedItem} />);
     }
+
+    console.log(items[field]?.children);
 
     return (
         <>
@@ -21,12 +22,13 @@ const Folder: FC<IFolder> = ({item, items, update}) => {
                 {
                     Object.keys(items).map((key: any, i) => {
                         const {name} = items[key];
-return <li className={`${styles.element} ${item === items[key] && styles.selected}`} key={i} onClick={() => setItem(items[key])}>{name}</li>
+return <li className={`${styles.element} ${items[field] === items[key] && styles.selected}`} key={i} onClick={() => setItem(key)}>{name}</li>
                     })
                 }
             </ul>
             <div className={styles.container}>
-                {item?.image ? <img className={styles.image} alt={item?.name} src={item.image} /> : <p>no image selected</p>}
+                {items[field]?.children}
+                {!items[field] && <p>no file selected</p>}
             </div>
         </>
     )

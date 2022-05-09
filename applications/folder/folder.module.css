@@ -39,23 +39,10 @@
 }
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
     /* max-width: 85%; */
-}
-.image {
-    height: auto;
-    max-width: 90%;
-    max-height: 90%;
-    /* background-repeat: no-repeat; */
-    z-index: 100;
-    background-size: contain;
-    margin-right: auto;
-    margin-left: auto;
-    background-position: left;
-
-    position: relative;
-    left: 4px;
 }

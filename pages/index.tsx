@@ -7,11 +7,12 @@ import Team from '../applications/team/team';
 import Application from '../components/application/application';
 import { CustomDragLayer } from '../components/custom-drag-layer/custom-drag-layer';
 import Icon from '../components/icon/icon';
+import ScalableImage from '../components/scalable-image/scalable-image';
 import {IApplications, IFolderItems, IIcons, stringify, TFolderItem} from '../utils/misc';
 
 import styles from './index.module.css';
-
-const folderTest: IFolderItems = {dog: {name: 'dog.png', image: 'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg'}, cat: {name: 'cat.png', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/1200px-Cat_November_2010-1a.jpg'}};
+// image: 'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg'
+const folderTest = {dog: {name: 'dog.png', children: <ScalableImage src={'https://post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/02/322868_1100-800x825.jpg'} alt={'dog'} />}, cat: {name: 'cat.png', children: <ScalableImage src={'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/1200px-Cat_November_2010-1a.jpg'} alt={'cat'} />}};
 
 const Homescreen: NextPage = () => {
   
@@ -33,7 +34,7 @@ const Homescreen: NextPage = () => {
   const [applications, setApplications] = useState<IApplications>({
     team: {name: "team", applicationName: "team.txt", index: 1, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: <Team />},
     roadmap: {name: "roadmap", applicationName: "roadmap.txt", index: 0, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: <Roadmap />},
-    folder: {name: "folder", applicationName: "folder n1", style: {'display': 'flex'}, index: 2, width: 250, height: 250, top: 50, left: 50, isOpen: true, isZoomed: false, children: <Folder item={{name: '', image: ''}} items={folderTest} update={updateApplication} />}
+    folder: {name: "folder", applicationName: "folder n1", style: {'display': 'flex'}, index: 2, width: 250, height: 250, top: 50, left: 50, isOpen: true, isZoomed: false, children: <Folder field={''} items={folderTest} update={updateApplication} />}
   })
   
   const move = useCallback((type: "app" | "icon", name: "team" | "roadmap", left: number, top: number, data?: any) => {
