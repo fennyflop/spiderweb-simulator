@@ -23,6 +23,7 @@ const Homescreen: NextPage = () => {
     "team": { top: 180, left: 20, name: "team", filename: "team.txt", image: "/text-icon.png", type: "icon"},
     "roadmap": { top: 20, left: 80, name: "roadmap", filename: "roadmap.txt", image: "/text-icon.png", type: "icon"},
     "folder": {top: 200, left: 200, name: "folder", filename: "folder n1", image: "/folder-icon.png", type: "icon"},
+    "spiderweb": {top: 500, left: 300, name: "spiderweb", filename: "spiderweb.exe", image: "/cobweb.webp", type: "icon"},
   });
 
   const updateApplication = (application: string, field: string, updatedChildren: any) => {
@@ -34,7 +35,8 @@ const Homescreen: NextPage = () => {
   const [applications, setApplications] = useState<IApplications>({
     team: {name: "team", applicationName: "team.txt", index: 1, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: <Team />},
     roadmap: {name: "roadmap", applicationName: "roadmap.txt", index: 0, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: <Roadmap />},
-    folder: {name: "folder", applicationName: "folder n1", style: {'display': 'flex'}, index: 2, width: 250, height: 250, top: 50, left: 50, isOpen: true, isZoomed: false, children: <Folder field={''} items={folderTest} update={updateApplication} />}
+    folder: {name: "folder", applicationName: "folder n1", style: {'display': 'flex'}, index: 2, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: <Folder field={''} items={folderTest} update={updateApplication} />},
+    spiderweb: {name: "spiderweb", applicationName: "spiderweb.exe", index: 3, width: 250, height: 250, top: 50, left: 50, isOpen: false, isZoomed: false, children: <></>}
   })
   
   const move = useCallback((type: "app" | "icon", name: "team" | "roadmap", left: number, top: number, data?: any) => {
@@ -84,8 +86,12 @@ const Homescreen: NextPage = () => {
     })
   }
 
+  
   // remember where each icon was left
   useEffect(() => {
+    // uncomment if we need to update icons while in dev
+    // localStorage.removeItem('icons');
+
     const loadedIcons = localStorage.getItem('icons');
 
     if (loadedIcons) setIcons(JSON.parse(loadedIcons));
